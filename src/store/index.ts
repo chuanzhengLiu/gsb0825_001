@@ -54,8 +54,11 @@ export const useStore = defineStore('store', {
 
     [REDO]() {
       if (this.history.future.length > 0) {
-        const next = this.history.future[0]
-        const newFuture = this.history.future.slice(1)
+        const next = this.history.future[this.history.future.length - 1]
+        const newFuture = this.history.future.slice(
+          0,
+          this.history.future.length - 1
+        )
         this.history = {
           past: [...this.history.past, this.history.present],
           present: next,
